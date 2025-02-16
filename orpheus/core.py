@@ -30,75 +30,72 @@ def true_current_utc_timestamp():
 
 class Orpheus:
     def __init__(self, private_mode=False):
-        self.extensions, self.extension_list, self.module_list, self.module_settings, self.module_netloc_constants, self.loaded_modules = {}, set(), set(), {}, {}, {}
+        (
+            self.extensions,
+            self.extension_list,
+            self.module_list,
+            self.module_settings,
+            self.module_netloc_constants,
+            self.loaded_modules,
+        ) = {}, set(), set(), {}, {}, {}
 
         self.default_global_settings = {
             "general": {
                 "download_path": "./downloads/",
                 "download_quality": "hifi",
-                "search_limit": 10
+                "search_limit": 10,
             },
-            "artist_downloading":{
+            "artist_downloading": {
                 "return_credited_albums": True,
-                "separate_tracks_skip_downloaded": True
+                "separate_tracks_skip_downloaded": True,
             },
             "formatting": {
-                "album_format": "{name}{explicit}",
+                "album_format": "{release_year} - {name}",
                 "playlist_format": "{name}{explicit}",
                 "track_filename_format": "{track_number}. {name}",
-                "single_full_path_format": "{name}",
+                "single_full_path_format": "{artist}/Singles/{name}",
                 "enable_zfill": True,
                 "force_album_format": False,
-                "album_in_artist_folder": False
+                "album_in_artist_folder": True,
             },
-            "codecs": {
-                "proprietary_codecs": False,
-                "spatial_codecs": True
-            },
+            "codecs": {"proprietary_codecs": False, "spatial_codecs": False},
             "module_defaults": {
                 "lyrics": "default",
                 "covers": "default",
-                "credits": "default"
+                "credits": "default",
             },
             "lyrics": {
-                "embed_lyrics": True,
+                "embed_lyrics": False,
                 "embed_synced_lyrics": False,
-                "save_synced_lyrics": True
+                "save_synced_lyrics": False,
             },
             "covers": {
                 "embed_cover": True,
                 "main_compression": "high",
-                "main_resolution": 1400,
+                "main_resolution": 1000,
                 "save_external": False,
-                "external_format": 'png',
+                "external_format": "png",
                 "external_compression": "low",
                 "external_resolution": 3000,
-                "save_animated_cover": True
+                "save_animated_cover": True,
             },
             "playlist": {
                 "save_m3u": True,
                 "paths_m3u": "absolute",
-                "extended_m3u": True
+                "extended_m3u": True,
             },
             "advanced": {
                 "advanced_login_system": False,
-                "codec_conversions": {
-                    "alac": "flac",
-                    "wav": "flac"
-                },
-                "conversion_flags": {
-                    "flac": {
-                        "compression_level": "5"
-                    }
-                },
+                "codec_conversions": {"alac": "flac", "wav": "flac"},
+                "conversion_flags": {"flac": {"compression_level": "5"}},
                 "conversion_keep_original": False,
                 "cover_variance_threshold": 8,
                 "debug_mode": False,
                 "disable_subscription_checks": False,
                 "enable_undesirable_conversions": False,
                 "ignore_existing_files": False,
-                "ignore_different_artists": True
-            }
+                "ignore_different_artists": True,
+            },
         }
 
         self.data_folder_base = 'config'
